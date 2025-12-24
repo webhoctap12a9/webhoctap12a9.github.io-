@@ -17,20 +17,20 @@
 <div class="video-bg hidden">
 
   <div class="video-box">
-    <video muted autoplay loop playsinline>
-      <source src="assest/video/video1.mp4" type="video/mp4">
+    <video class="slave" muted playsinline preload="auto">
+      <source src="./assest/video/video1.mp4" type="video/mp4">
     </video>
   </div>
 
   <div class="video-box">
-    <video id="mainVideo" muted autoplay playsinline>
-      <source src="assest/video/video1.mp4" type="video/mp4">
+    <video id="mainVideo" muted playsinline preload="auto">
+      <source src="./assest/video/video1.mp4" type="video/mp4">
     </video>
   </div>
 
   <div class="video-box">
-    <video muted autoplay loop playsinline>
-      <source src="assest/video/video1.mp4" type="video/mp4">
+    <video class="slave" muted playsinline preload="auto">
+      <source src="./assest/video/video1.mp4" type="video/mp4">
     </video>
     <button id="soundBtn">🔊 Bật tiếng</button>
   </div>
@@ -41,28 +41,49 @@
 const text = document.querySelector(".intro-text");
 const videoBox = document.querySelector(".video-bg");
 const mainVideo = document.getElementById("mainVideo");
+const slaves = document.querySelectorAll(".slave");
+const soundBtn = document.getElementById("soundBtn");
 
 // 2s: chữ mờ
 setTimeout(() => {
   text.classList.add("fade-out");
 }, 2000);
 
-// 3s: hiện video
+// 3s: hiện video + CHẠY ĐỒNG BỘ
 setTimeout(() => {
   videoBox.classList.remove("hidden");
   videoBox.classList.add("fade-in");
+
+  // chạy video chính trước
+  mainVideo.currentTime = 0;
+  mainVideo.play();
+
+  // các video phụ bám theo
+  slaves.forEach(v => {
+    v.currentTime = 0;
+    v.play();
+  });
+
 }, 3000);
+
+// ĐỒNG BỘ THỜI GIAN (chống lệch)
+mainVideo.addEventListener("timeupdate", () => {
+  slaves.forEach(v => {
+    if (Math.abs(v.currentTime - mainVideo.currentTime) > 0.04) {
+      v.currentTime = mainVideo.currentTime;
+    }
+  });
+});
 
 // HẾT VIDEO → CHUYỂN TRANG
 mainVideo.addEventListener("ended", () => {
   document.body.classList.add("fade-out");
-
   setTimeout(() => {
     window.location.href = "trang-tiep-theo.html";
   }, 800);
 });
-const soundBtn = document.getElementById("soundBtn");
 
+// BẬT TIẾNG
 soundBtn.addEventListener("click", () => {
   mainVideo.muted = false;
   mainVideo.play();
