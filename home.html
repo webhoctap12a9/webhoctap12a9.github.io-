@@ -12,28 +12,19 @@
   <h2>Trước tiên chúng ta hãy đến với video này</h2>
 </div>
 
-<div class="video-bg hidden">
+<div class="video-wrapper hidden">
+  <video id="mainVideo" muted autoplay playsinline preload="auto">
+    <source src="./assest/video/video1.mp4" type="video/mp4">
+  </video>
 
-  <div class="video-box mirror"></div>
-
-  <div class="video-box main">
-    <video id="mainVideo" muted autoplay playsinline preload="auto">
-      <source src="./assest/video/video1.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="video-box mirror">
-    <button id="soundBtn">🔊 Bật tiếng</button>
-  </div>
-
+  <button id="soundBtn">🔊 Bật tiếng</button>
 </div>
 
 <script>
 const text = document.querySelector(".intro-text");
-const videoBg = document.querySelector(".video-bg");
+const videoWrap = document.querySelector(".video-wrapper");
 const video = document.getElementById("mainVideo");
 const soundBtn = document.getElementById("soundBtn");
-const mirrors = document.querySelectorAll(".mirror");
 
 // 2s mờ chữ
 setTimeout(() => {
@@ -42,17 +33,10 @@ setTimeout(() => {
 
 // 3s hiện video
 setTimeout(() => {
-  videoBg.classList.remove("hidden");
-  videoBg.classList.add("fade-in");
+  videoWrap.classList.remove("hidden");
+  videoWrap.classList.add("fade-in");
   video.play();
 }, 3000);
-
-// gán video làm background cho 2 khung phụ
-video.addEventListener("loadeddata", () => {
-  mirrors.forEach(m => {
-    m.style.background = `url(${video.currentSrc}) center / cover no-repeat`;
-  });
-});
 
 // bật tiếng
 soundBtn.onclick = () => {
