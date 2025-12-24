@@ -7,31 +7,22 @@
 </head>
 <body>
 
-<!-- TEXT -->
 <div class="intro-text">
   <h1>Thuyết trình bàn em</h1>
   <h2>Trước tiên chúng ta hãy đến với video này</h2>
 </div>
 
-<!-- VIDEO 3 KHUNG -->
 <div class="video-bg hidden">
 
-  <div class="video-box">
-    <video class="slave" muted playsinline preload="auto">
+  <div class="video-box mirror"></div>
+
+  <div class="video-box main">
+    <video id="mainVideo" muted autoplay playsinline preload="auto">
       <source src="./assest/video/video1.mp4" type="video/mp4">
     </video>
   </div>
 
-  <div class="video-box">
-    <video id="mainVideo" muted playsinline preload="auto">
-      <source src="./assest/video/video1.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="video-box">
-    <video class="slave" muted playsinline preload="auto">
-      <source src="./assest/video/video1.mp4" type="video/mp4">
-    </video>
+  <div class="video-box mirror">
     <button id="soundBtn">🔊 Bật tiếng</button>
   </div>
 
@@ -39,55 +30,43 @@
 
 <script>
 const text = document.querySelector(".intro-text");
-const videoBox = document.querySelector(".video-bg");
-const mainVideo = document.getElementById("mainVideo");
-const slaves = document.querySelectorAll(".slave");
+const videoBg = document.querySelector(".video-bg");
+const video = document.getElementById("mainVideo");
 const soundBtn = document.getElementById("soundBtn");
+const mirrors = document.querySelectorAll(".mirror");
 
-// 2s: chữ mờ
+// 2s mờ chữ
 setTimeout(() => {
   text.classList.add("fade-out");
 }, 2000);
 
-// 3s: hiện video + CHẠY ĐỒNG BỘ
+// 3s hiện video
 setTimeout(() => {
-  videoBox.classList.remove("hidden");
-  videoBox.classList.add("fade-in");
-
-  // chạy video chính trước
-  mainVideo.currentTime = 0;
-  mainVideo.play();
-
-  // các video phụ bám theo
-  slaves.forEach(v => {
-    v.currentTime = 0;
-    v.play();
-  });
-
+  videoBg.classList.remove("hidden");
+  videoBg.classList.add("fade-in");
+  video.play();
 }, 3000);
 
-// ĐỒNG BỘ THỜI GIAN (chống lệch)
-mainVideo.addEventListener("timeupdate", () => {
-  slaves.forEach(v => {
-    if (Math.abs(v.currentTime - mainVideo.currentTime) > 0.04) {
-      v.currentTime = mainVideo.currentTime;
-    }
+// gán video làm background cho 2 khung phụ
+video.addEventListener("loadeddata", () => {
+  mirrors.forEach(m => {
+    m.style.background = `url(${video.currentSrc}) center / cover no-repeat`;
   });
 });
 
-// HẾT VIDEO → CHUYỂN TRANG
-mainVideo.addEventListener("ended", () => {
+// bật tiếng
+soundBtn.onclick = () => {
+  video.muted = false;
+  video.play();
+  soundBtn.style.display = "none";
+};
+
+// hết video → chuyển trang
+video.addEventListener("ended", () => {
   document.body.classList.add("fade-out");
   setTimeout(() => {
     window.location.href = "trang-tiep-theo.html";
   }, 800);
-});
-
-// BẬT TIẾNG
-soundBtn.addEventListener("click", () => {
-  mainVideo.muted = false;
-  mainVideo.play();
-  soundBtn.style.display = "none";
 });
 </script>
 
