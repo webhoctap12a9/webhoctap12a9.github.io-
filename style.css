@@ -1,0 +1,47 @@
+/* Thiết lập toàn bộ trang */
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("assest/images/anh9.png");
+  background-size: cover;       /* QUYẾT ĐỊNH PHỦ FULL */
+  background-position: center;  /*  Ảnh không lệch */
+  background-repeat: no-repeat; /*  Không lặp ảnh */
+}
+body {
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+body {
+  transition: opacity 0.8s ease;
+}
+
+.fade-out {
+  opacity: 0;
+}
+/* Khung đăng nhập nổi lên */
+.login-box {
+  width: 320px;
+  padding: 20px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.3); /* nền mờ */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* Ô nhập liệu */
+.login-box input {
+  width: 100%;                /* Chiếm hết chiều ngang khung */
+  padding: 10px;              /* Độ dày ô nhập */
+  margin: 10px 0;             /* Khoảng cách trên dưới */
+  box-sizing: border-box;     /* Không bị tràn width */
+}
+
+/* Nút đăng nhập */
+.login-box button {
+  width: 100%;                /* Nút rộng bằng khung */
+  padding: 10px;              /* Độ cao nút */
+  cursor: pointer;            /* Hiển thị bàn tay khi hover */
+}

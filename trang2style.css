@@ -1,0 +1,43 @@
+#tieude-anh1 {
+  display: flex;
+  margin-top: -70px;
+}
+
+#anh  {
+  margin-left: auto;   /* then chốt đẩy sang phải */
+  text-align: center;
+  margin-top: -700px;
+}
+p {
+ margin-top: -5px;
+ color: blueviolet;
+}
+#anh1 {
+  width: 170px;
+}
+#muc1  {
+ color:red;
+}
+h6 {
+ margin-left: 60px;
+ font-size: 10px;
+}
+#anh2 {
+ margin-left: 30px;
+ margin-top: 60px;
+}
+#muc2 {
+ color: rgb(234,38,2);
+}
+#anh3 {
+ width: 200px;
+}
+#anh4 {
+ width: 250px;
+ margin-left: 150px;
+ margin-top: -400px;
+}
+#anh5 {
+ max-width: auto;
+ width: 250pz;
+}

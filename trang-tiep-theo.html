@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Hiện chữ rồi chuyển trang</title>
+  <style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: pink;
+  
+  #text {
+    font-size: 50px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1 id="text"></h1>
+
+<script>
+  const words = [
+    "Cảm", "ơn", "các", "bạn", "và", "thầy", "cô,",
+    "<br>",
+    "Đây", "là", "trang", "web", "của", "bàn", "em"
+  ];
+  
+  let index = 0;
+  
+  function typeText() {
+    if (index < words.length) {
+      document.getElementById("text").innerHTML += words[index] + "\u00A0";
+      index++;
+      setTimeout(typeText, 400);
+    } else {
+      setTimeout(() => {
+        window.location.href = "trang2.html";
+      }, 1000);
+    }
+  }
+  
+  document.getElementById("text").innerHTML = "";
+  typeText();
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chủ</title>
+  <link rel="stylesheet" href="homestyle.css">
+</head>
+<body>
+
+<!-- TEXT -->
+<div class="intro-text">
+  <h1>Thuyết trình bàn em</h1>
+  <h2>Trước tiên chúng ta hãy đến với video này</h2>
+</div>
+
+<!-- VIDEO 3 KHUNG -->
+<div class="video-bg hidden">
+
+  <div class="video-box">
+    <video muted autoplay loop playsinline>
+      <source src="assest/video/video1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="video-box">
+    <video id="mainVideo" muted autoplay playsinline>
+      <source src="assest/video/video1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="video-box">
+    <video muted autoplay loop playsinline>
+      <source src="assest/video/video1.mp4" type="video/mp4">
+    </video>
+    <button id="soundBtn">🔊 Bật tiếng</button>
+  </div>
+
+</div>
+
+<script>
+const text = document.querySelector(".intro-text");
+const videoBox = document.querySelector(".video-bg");
+const mainVideo = document.getElementById("mainVideo");
+
+// 2s: chữ mờ
+setTimeout(() => {
+  text.classList.add("fade-out");
+}, 2000);
+
+// 3s: hiện video
+setTimeout(() => {
+  videoBox.classList.remove("hidden");
+  videoBox.classList.add("fade-in");
+}, 3000);
+
+// HẾT VIDEO → CHUYỂN TRANG
+mainVideo.addEventListener("ended", () => {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    window.location.href = "trang-tiep-theo.html";
+  }, 800);
+});
+const soundBtn = document.getElementById("soundBtn");
+
+soundBtn.addEventListener("click", () => {
+  mainVideo.muted = false;
+  mainVideo.play();
+  soundBtn.style.display = "none";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>web học tập</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dangnhap-xuli">
+  <div class="login-box">
+   <form  onsubmit="dangNhap(event)">
+     <label for="email">Email:</label>
+       <input id="email" type="text" name="email" placeholder="Hãy nhập vào đây" required>
+        <br>
+     <label for="password">Mật khẩu:</label>
+       <input id="password" type="password" name="password" placeholder="Hãy nhập vào đây" required>
+     <button type="submit">Đăng nhập</button>
+   </form>
+   <p id="error"></p>
+  </div>
+   <script>
+   function dangNhap(event) {
+     event.preventDefault(); // chặn reload form
+     
+     const email = document.getElementById("email").value;
+     const password = document.getElementById("password").value;
+     
+     // kiểm tra tài khoản cố định
+     if (email === "lop12" && password === "A9") {
+       document.body.classList.add("fade-out");
+setTimeout(() => { window.location.href = "home.html";
+     }, 800);
+     } else {
+       document.getElementById("error").innerText =
+         "Sai tài khoản hoặc mật khẩu";
+     }
+   }
+ </script>
+</body>
+</html>
