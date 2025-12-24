@@ -22,36 +22,28 @@
 
 <script>
 const text = document.querySelector(".intro-text");
-const videoWrap = document.querySelector(".video-wrapper");
+const wrap = document.querySelector(".video-wrapper");
 const video = document.getElementById("mainVideo");
-const soundBtn = document.getElementById("soundBtn");
+const btn = document.getElementById("soundBtn");
 
-// 2s mờ chữ
-setTimeout(() => {
-  text.classList.add("fade-out");
-}, 2000);
+setTimeout(() => text.classList.add("fade-out"), 2000);
 
-// 3s hiện video
 setTimeout(() => {
-  videoWrap.classList.remove("hidden");
-  videoWrap.classList.add("fade-in");
+  wrap.classList.remove("hidden");
+  wrap.classList.add("fade-in");
   video.play();
 }, 3000);
 
-// bật tiếng
-soundBtn.onclick = () => {
+btn.onclick = () => {
   video.muted = false;
   video.play();
-  soundBtn.style.display = "none";
+  btn.style.display = "none";
 };
 
-// hết video → chuyển trang
-video.addEventListener("ended", () => {
+video.onended = () => {
   document.body.classList.add("fade-out");
-  setTimeout(() => {
-    window.location.href = "trang-tiep-theo.html";
-  }, 800);
-});
+  setTimeout(() => location.href = "trang-tiep-theo.html", 800);
+};
 </script>
 
 </body>
